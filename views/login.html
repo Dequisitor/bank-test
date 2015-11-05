@@ -1,10 +1,15 @@
-<div class="container">
-	<div class="row">
-		<label>Login name</label>
-		<input type="text" data-ng-model="login" />
-	</div>
-	<div class="row">
-		<label>Password</label>
-		<input type="password" data-ng-model="passwd" />
-	</div>
+<div class="container col-md-4 col-md-offset-4">
+	<form>
+		<div class="row">
+			<span class="col-md-6 text-right">Login name</span>
+			<input class="col-md-6" type="text" required="required" data-ng-model="login" />
+		</div>
+		<div class="row">
+			<span class="col-md-6 text-right">Password</span>
+			<input class="col-md-6" type="password" required="required" data-ng-model="passwd" />
+		</div>
+		<div class="row">
+			<button class="btn btn-default btn-success pull-right">Login</button>
+		</div>
+	</form>
 </div>
