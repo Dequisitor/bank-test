@@ -5,15 +5,21 @@
 		<title>Test</title>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="../content/main.css"/>
-
 	</head>
 
 	<body data-ng-controller="mainController">
-		<nav class="navbar navbar-default">
+		{{isAuth}}
+		<nav class="navbar navbar-default" data-ng-if="isAuth">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
-					<li><a href="#login">login</a></li>
-					<li><a href="#index">index</a></li>
+					<li><a href="#main">Main</a></li>
+					<li><a href="#transfers">Transfers</a></li>
+					<li><a href="#history">History</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="/logout">Logout</a></li>
+				</ul>
 			</div>
 		</nav>
 
@@ -21,12 +27,16 @@
 	</body>
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-mocks.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.5/angular-strap.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.5/angular-strap.tpl.js"></script>
 	<script src="../scripts/controllers/module.js"></script>
-	<script src="../scripts/routeConfig.js"></script>
+	<script src="../scripts/services/auth.provider.js"></script>
+	<script src="../scripts/services/auth.interceptor.js"></script>
+	<script src="../scripts/route.config.js"></script>
+	<script src="../mock/login.mock.js"></script>
 	<script src="../scripts/controllers/main.controller.js"></script>
 	<script src="../scripts/controllers/login.controller.js"></script>
 	<script src="../scripts/controllers/index.controller.js"></script>

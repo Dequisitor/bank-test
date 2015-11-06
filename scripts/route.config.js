@@ -2,16 +2,16 @@ mainApp
 .config(["$routeProvider", "$locationProvider",
 		function ($routeProvider, $locationProvider) {
 			$routeProvider
-			.when('/login', {
+			.when("/login", {
 				templateUrl: "login.html",
-				controller: 'loginController'
+				controller: "loginController"
 			})
 			.when("/index", {
 				templateUrl: "index.html",
 				controller: "indexController"
 			})
 			.otherwise({
-				redirectTo: "login"
+				redirectTo: "/login"
 			});
 
 			//$locationProvider.html5Mode(true);

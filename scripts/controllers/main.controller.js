@@ -1,5 +1,3 @@
-mainApp
-.controller("mainController", ["$routeParams", function($routeParams) {
-	console.log("this is some high level faggotry");
-}
-]);
+mainApp.controller("mainController", function(authService, $scope) {
+	$scope.isAuth = authService.isAuthenticated;
+});
