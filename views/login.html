@@ -1,17 +1,10 @@
-<div class="container col-md-4 col-md-offset-4">
-	<span></span>
-	<form data-ng-submit="authenticate()">
-		<span>{{ loginMessage }}</span>
-		<div class="row">
-			<span class="col-md-6 text-right">Login name</span>
-			<input class="col-md-6" type="text" required="required" data-ng-model="user.login" />
-		</div>
-		<div class="row">
-			<span class="col-md-6 text-right">Password</span>
-			<input class="col-md-6" type="password" required="required" data-ng-model="user.passwd" />
-		</div>
-		<div class="row">
-			<button class="btn btn-default btn-submit pull-right" type="submit">Login</button>
-		</div>
+<div class="container">
+	<h2>Welcome</h2>
+	<hr/>
+	<form class="login" data-ng-submit="authenticate()">
+		<div class="alert alert-danger" data-ng-if="loginMessage.length>0"><strong>Warning!</strong> {{ loginMessage }}</div>
+		<input type="text" class="form-control" required="required" autofocus="" data-ng-model="user.login" placeholder="User name"/>
+		<input type="password" class="form-control" required="required" data-ng-model="user.passwd" placeholder="Password"/>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 	</form>
 </div>

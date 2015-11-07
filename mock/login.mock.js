@@ -5,10 +5,9 @@ mainApp.config(function ($provide) {
 		var proxy = function (method, url, data, callback, headers) {
 			var interceptor = function () {
 				console.log(url);
-				console.log(headers.auth);
-				console.log(token);
 
-				if (url === "index.html" && headers.auth !== token) {
+				if (url === "home.html" && (!token || !headers.auth || headers.auth != token)) {
+					console.log("headers.auth=" + headers.auth + " token=" + token);
 					arguments = [401, {}, {}];
 				}
 

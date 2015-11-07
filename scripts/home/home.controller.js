@@ -1,5 +1,5 @@
 mainApp
-.controller("indexController", ["$scope", "$routeParams", function($scope, $routeParams) {
+.controller("homeController", ["$scope", "$routeParams", function($scope, $routeParams) {
 	$scope.accounts = [
 	{
 		id: "00000000-111111111-12312312",

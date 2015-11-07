@@ -4,14 +4,26 @@ mainApp
 			$routeProvider
 			.when("/login", {
 				templateUrl: "login.html",
-				controller: "loginController"
+				controller: "loginController",
+				requireLogin: false
 			})
-			.when("/index", {
-				templateUrl: "index.html",
-				controller: "indexController"
+			.when("/home", {
+				templateUrl: "home.html",
+				controller: "homeController",
+				requireLogin: true
+			})
+			.when("/transfer", {
+				templateUrl: "transfer.html",
+				controller: "transferController",
+				requireLogin: true
+			})
+			.when("/history", {
+				templateUrl: "history.html",
+				controller: "historyController",
+				requireLogin: true
 			})
 			.otherwise({
-				redirectTo: "/login"
+				redirectTo: "/home"
 			});
 
 			//$locationProvider.html5Mode(true);
