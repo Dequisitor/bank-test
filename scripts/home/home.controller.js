@@ -1,5 +1,5 @@
 mainApp
-.controller("homeController", ["$scope", "$routeParams", function($scope, $routeParams) {
+.controller("homeController", function($scope, $http) {
 	$scope.accounts = [
 	{
 		id: "00000000-111111111-12312312",
@@ -16,5 +16,8 @@ mainApp
 		balance: 1003.34,
 		currency: "USD"
 	}];
-}
-]);
+
+	$http.get("/data/user/"+"faggit").then(function(response) {
+		console.log(response);
+	});
+});
