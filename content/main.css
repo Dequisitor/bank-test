@@ -1,17 +1,28 @@
 body * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 form.login {
-	//margin: 0 auto;
-	max-width: 300px;
-	padding: 10px;
+  width: 320px;
+  padding: 10px;
 }
-
 form.login input {
-	height: auto;
+  height: auto;
 }
-
 form.login button {
-	margin-top: 20px;
+  margin-top: 20px;
+}
+#logoutModal .modal-dialog {
+  width: 300px;
+}
+#logoutModal .modal-dialog button {
+  margin-right: 10px;
+}
+#transfers .balance {
+  padding-left: 20px;
+}
+#transfers .block {
+  margin-top: 10px;
+  padding-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }

@@ -1,5 +1,5 @@
 "use strict";
-var mainApp = angular.module("mainApp", ["ngRoute", "ngAnimate", "mgcrea.ngStrap", "ngMockE2E"]);
+var mainApp = angular.module("mainApp", ["ngSanitize", "ngRoute", "ngAnimate", "mgcrea.ngStrap", "ngMockE2E"]);
 
 mainApp.run(function($rootScope, $location, $window, AuthService) {
 
@@ -15,6 +15,7 @@ mainApp.run(function($rootScope, $location, $window, AuthService) {
 	});
 
 	$rootScope.$on("$routeChangeError", function (event) {
+		console.log(event);
 		AuthService.logout();
 		$rootScope.$evalAsync(function () {
 			$location.path("/login");

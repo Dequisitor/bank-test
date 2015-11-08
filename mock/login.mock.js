@@ -1,13 +1,15 @@
-var token = undefined;
+var token = ["BTuser1", "BTuser2", "BTuser3"];
 
 mainApp.config(function ($provide) {
 	$provide.decorator("$httpBackend", function($delegate) {
 		var proxy = function (method, url, data, callback, headers) {
 			var interceptor = function () {
-				if (url === "home.html" && (!token || !headers.auth || headers.auth != token)) {
-					console.log("headers.auth=" + headers.auth + " token=" + token);
+				if ((url !== "login.html" && url !== "/auth") && (!headers.auth || token.indexOf(headers.auth) == -1)) {
+					console.log("requested url=" +url);
+					console.log("headers.auth=" + headers.auth + " token=" + token.indexOf(headers.auth));
 					arguments = [401, {}, {}];
 				}
+
 				callback.apply(this, arguments);
 			};
 			return $delegate.call(this, method, url, data, interceptor, headers);
@@ -24,24 +26,27 @@ mainApp.run(function ($httpBackend) {
 
 	$httpBackend.whenPOST("/auth").respond(function (method, url, data, headers) {
 		var user = angular.fromJson(data);
-		if (user.login == "test01" && user.passwd == "passwd") {
-			token = "BT" + Math.round(Math.random() * 1000000);
-			return [200, {token: token}, {}];
-		} else {
-			return [401, {}, {}];
+		if (user.login == "test01" && user.passwd == "pass1") {
+			return [200, {token: token[0]}, {}];
 		}
+		if (user.login == "test02" && user.passwd == "pass2") {
+			return [200, {token: token[1]}, {}];
+		}
+		if (user.login == "test03" && user.passwd == "pass3") {
+			return [200, {token: token[2]}, {}];
+		}
+
+		return [401, {}, {}];
 	});
 
-	$httpBackend.whenGET(/\/data\/user\/.*/).respond(function(method, url, data, headers, params) {
-		var user = url.split("/")[3];
-		console.log(user);
+	$httpBackend.whenGET("/data").respond(function(method, url, data, headers, params) {
 		var data = [{
-			account: "0000000-11111111-22222222",
+			id: "0000000-11111111-22222222",
 			balance: 1234,
 			currency: "USD"
 		},
 		{
-			account: "0000000-11111111-22222222",
+			id: "0000000-11111111-22222222",
 			balance: 57689,
 			currency: "HUF"
 		}];

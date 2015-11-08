@@ -3,8 +3,9 @@
 	<hr/>
 	<form class="login" data-ng-submit="authenticate()">
 		<div class="alert alert-danger" data-ng-if="loginMessage.length>0"><strong>Warning!</strong> {{ loginMessage }}</div>
-		<input type="text" class="form-control" required="required" autofocus="" data-ng-model="user.login" placeholder="User name"/>
-		<input type="password" class="form-control" required="required" data-ng-model="user.passwd" placeholder="Password"/>
+		<input id="login" type="text" class="form-control" required="required" autofocus="" data-ng-model="user.login" placeholder="User name"/>
+		<input id="passwd" type="password" class="form-control" required="required" data-ng-model="user.passwd" placeholder="Password"/>
+		<input type="checkbox" data-ng-model="rememberMe" /> Remember me
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 	</form>
 </div>

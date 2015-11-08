@@ -7,14 +7,14 @@
 		</div>
 		<table class="table">
 			<tr>
-				<th class="col-md-6">Account ID</th>
-				<th class="col-md-4">Balance</th>
-				<th class="col-md-2">Currency</th>
+				<th class="col-md-8">Account #</th>
+				<th class="col-md-2 text-right">Balance</th>
+				<th class="col-md-2 text-right">Currency</th>
 			</tr>
 			<tr data-ng-repeat="account in accounts">
-				<td class="col-md-6">{{account.id}}</td>
-				<td class="col-md-4">{{account.balance}}</td>
-				<td class="col-md-2">{{account.currency}}</td>
+				<td class="col-md-8">{{account.id}}</td>
+				<td class="col-md-2 text-right">{{account.balance}}</td>
+				<td class="col-md-2 text-right">{{account.currency}}</td>
 			</tr>
 		</table>
 	</div>

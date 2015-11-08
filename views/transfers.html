@@ -1,0 +1,37 @@
+<div class="container col-md-4 col-md-offset-4" id="transfers">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<div class="panel-title">
+				Domestic transaction
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="">
+				<div>
+					<label>Transfer from</label>
+				</div>
+				<button type="button" class="btn btn-default form-control" data-html="1" data-ng-model="selectedAccount" data-bs-select="" data-bs-options="account as account.composite for account in accounts">
+					Account <span class="caret"></span>
+				</button>
+			</div>
+
+			<div class="block" data-ng-if="step>1">
+				<div>
+					<label>Amount to transfer</label>
+				</div>
+				<div class="input-group">
+					<input type="number" class="form-control" data-ng-model="amount" />
+					<span class="input-group-addon">{{selectedAccount.currency}}</span>
+				</div>
+			</div>
+
+			<div class="block" data-ng-if="step>2">
+				<div>
+					<label>Destination account</label>
+				</div>
+				<input type="text" class="form-control" data-ng-model="destination" />
+			</div>
+
+		</div>
+	</div>
+</div>
