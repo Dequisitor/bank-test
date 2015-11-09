@@ -1,8 +1,7 @@
 mainApp.controller("transfersController", function ($scope, $http) {
 	$scope.transfer = {};
-
+	
 	$http.get("/data").then(function(response) {
-		console.log(response);
 		$scope.accounts = response.data;
 
 		for (var i=0; i<$scope.accounts.length; i++) {
@@ -10,7 +9,13 @@ mainApp.controller("transfersController", function ($scope, $http) {
 		}
 	});
 
-	$scope.step = 0;
+	$scope.reset = function() {
+		$scope.transfer = {};
+		if (transfer) {
+			transfer.$setPrisitine();
+			transfer.$setUntouched();
+		}
+	};
 
 	$scope.adjustProgressbar = function() {
 		var position = 0;
@@ -21,7 +26,6 @@ mainApp.controller("transfersController", function ($scope, $http) {
 			}
 		}
 
-		console.log($scope.transfer.amount);
 		$scope.transfer.percentage = position;
 		angular.element("#transfers .progress-bar").css("width", position+"%");
 	};

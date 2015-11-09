@@ -18,14 +18,33 @@ mainApp.directive("giro", function() {
 				return effectiveValue;
 			});
 
-			ngModel.$validators.validGiro = function(modelValue, viewValue) {
-				if (!!modelValue && !!viewValue) {
-					var effectiveValue = modelValue.replace(/\D/g, "");
+			var checkCRC = function(value) {
+				var checks = [9, 7, 3, 1], crc = 0;
+				for (var i=0; i<value.length-1; i++) {
+					var check = checks[i%checks.length];
+					crc += value[i] * check;
+				}
+				return (10 - (crc%10)) == value[value.length-1];
+			};
 
-					if (effectiveValue.length == 24) {
-						
+			ngModel.$validators.giro = function(modelValue, viewValue) {
+				if (!!modelValue && !!viewValue) {
+					var effectiveValue = viewValue.replace(/\D/g, "");
+					var length = effectiveValue.length;
+					if (length == 16 || length == 24) {
+						return checkCRC(effectiveValue.slice(0, 8)) && checkCRC(effectiveValue.slice(8, length));
 					}
-					return (effectiveValue.length == 24 || effectiveValue.length == 16);
+				}
+
+				return true;
+			};
+
+			ngModel.$validators.length = function(modelValue, viewValue) {
+				if (!!modelValue && !!viewValue) {
+					var effectiveValue = viewValue.replace(/\D/g, "");
+					if (effectiveValue.length != 16 && effectiveValue.length != 24) {
+						return false;
+					}
 				}
 
 				return true;

@@ -41,8 +41,17 @@
 			<div class="block">
 				<div>
 					<label>Destination account</label>
+					<span data-ng-if="transfer.dest.$error.length" class="text-danger pull-right">Length must be 16 or 24 numbers</span>
+					<span data-ng-if="transfer.dest.$error.giro" class="text-danger pull-right">Not a valid GIRO account number</span>
 				</div>
-				<input type="text" class="form-control" data-ng-model="transfer.destination" required="" data-giro=""/>
+				<input 
+					name="dest" 
+					type="text" 
+					class="form-control" 
+					data-ng-model="transfer.destination" 
+					required="" 
+					data-giro="" 
+					/>
 			</div>
 
 			<div class="block">

@@ -3,10 +3,6 @@ mainApp.directive("currency", function() {
 		restrict: "A",
 		require: "ngModel",
 		link: function(scope, element, attr, ngModel) {
-			ngModel.$formatters.push(function(value) {
-				return value;
-			});
-
 			ngModel.$parsers.unshift(function(value) {
 				value = parseInt(value.replace(/\s/g, ""));
 
