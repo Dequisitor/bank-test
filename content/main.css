@@ -20,6 +20,9 @@ form.login button {
 #transfers .balance {
   padding-left: 20px;
 }
+#transfers .ng-invalid.ng-dirty {
+  border-color: red;
+}
 #transfers .block {
   margin-top: 10px;
   padding-top: 10px;

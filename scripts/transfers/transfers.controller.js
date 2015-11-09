@@ -1,4 +1,6 @@
 mainApp.controller("transfersController", function ($scope, $http) {
+	$scope.transfer = {};
+
 	$http.get("/data").then(function(response) {
 		console.log(response);
 		$scope.accounts = response.data;
@@ -8,16 +10,19 @@ mainApp.controller("transfersController", function ($scope, $http) {
 		}
 	});
 
-	$scope.step = 3;
-	$scope.amount = 100;
+	$scope.step = 0;
 
-	$scope.adjustProgressbar = function(amount) {
+	$scope.adjustProgressbar = function() {
 		var position = 0;
-		if (!!$scope.selectedAccount && !!amount) {
-			position = Math.round(amount / $scope.selectedAccount.balance * 100);
+		if (!!$scope.transfer.selectedAccount && !!$scope.transfer.amount) {
+			position = Math.round($scope.transfer.amount / $scope.transfer.selectedAccount.balance * 100);
+			if (position > 100) {
+				position = 100;
+			}
 		}
 
-		console.log(position);
+		console.log($scope.transfer.amount);
+		$scope.transfer.percentage = position;
 		angular.element("#transfers .progress-bar").css("width", position+"%");
 	};
 });

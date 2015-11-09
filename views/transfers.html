@@ -1,11 +1,12 @@
 <div class="container col-md-4 col-md-offset-4" id="transfers">
-	<div class="panel panel-info">
-		<div class="panel-heading">
-			<div class="panel-title">
-				Domestic transaction
-			</div>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<div class="panel-title">
+			Domestic transaction
 		</div>
-		<div class="panel-body">
+	</div>
+	<div class="panel-body">
+		<form name="transfer">
 			<div class="">
 				<div>
 					<label>Transfer from</label>
@@ -13,7 +14,8 @@
 				<button type="button" 
 					class="btn btn-default form-control" 
 					data-html="1" 
-					data-ng-model="selectedAccount" 
+					required=""
+					data-ng-model="transfer.selectedAccount" 
 					data-bs-select="" 
 					data-ng-change="adjustProgressbar()"
 					data-bs-options="account as account.composite for account in accounts">
@@ -21,27 +23,36 @@
 				</button>
 			</div>
 
-			<div class="block" data-ng-if="step>1">
+			<div class="block">
 				<div>
 					<label>Amount to transfer</label>
 				</div>
 				<div class="progress">
 					<div class="progress-bar"> 
+						{{ transfer.percentage }}%
 					</div>
 				</div>
 				<div class="input-group">
-					<input type="text" class="form-control" data-ng-model="amount" data-ng-change="adjustProgressbar(amount)"/>
-					<span class="input-group-addon">{{selectedAccount.currency}}</span>
+					<input type="text" class="form-control" data-ng-model="transfer.amount" required="" data-ng-change="adjustProgressbar()" data-currency=""/>
+					<span class="input-group-addon">{{transfer.selectedAccount.currency}}</span>
 				</div>
 			</div>
 
-			<div class="block" data-ng-if="step>2">
+			<div class="block">
 				<div>
 					<label>Destination account</label>
 				</div>
-				<input type="text" class="form-control" data-ng-model="destination" />
+				<input type="text" class="form-control" data-ng-model="transfer.destination" required="" data-giro=""/>
 			</div>
 
-		</div>
+			<div class="block">
+				<div>
+					<button class="btn btn-success pull-right" type="submit" data-ng-disabled="!transfer.$valid" data-ng-click="confirmTransfer()"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
+					<button class="btn btn-warning pull-right" type="button" data-ng-click="reset()"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+				</div>
+			</div>
+		</form>
+
 	</div>
+</div>
 </div>
