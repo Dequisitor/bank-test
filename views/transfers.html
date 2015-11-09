@@ -10,7 +10,13 @@
 				<div>
 					<label>Transfer from</label>
 				</div>
-				<button type="button" class="btn btn-default form-control" data-html="1" data-ng-model="selectedAccount" data-bs-select="" data-bs-options="account as account.composite for account in accounts">
+				<button type="button" 
+					class="btn btn-default form-control" 
+					data-html="1" 
+					data-ng-model="selectedAccount" 
+					data-bs-select="" 
+					data-ng-change="adjustProgressbar()"
+					data-bs-options="account as account.composite for account in accounts">
 					Account <span class="caret"></span>
 				</button>
 			</div>
@@ -19,8 +25,12 @@
 				<div>
 					<label>Amount to transfer</label>
 				</div>
+				<div class="progress">
+					<div class="progress-bar"> 
+					</div>
+				</div>
 				<div class="input-group">
-					<input type="number" class="form-control" data-ng-model="amount" />
+					<input type="text" class="form-control" data-ng-model="amount" data-ng-change="adjustProgressbar(amount)"/>
 					<span class="input-group-addon">{{selectedAccount.currency}}</span>
 				</div>
 			</div>
