@@ -1,7 +1,10 @@
-mainApp.controller("homeController", function($scope, $http) {
-	$http.get("/data").then(function(response) {
-		if (!!response.data) {
-			$scope.accounts = response.data.accounts;
-		}
-	});
+mainApp.controller("homeController", function($scope, $http, dataService) {
+
+	$scope.init = function() {
+		dataService.getData(function(data) {
+			$scope.accounts = data.accounts;
+		});
+	}
+	$scope.init();
+
 });

@@ -1,4 +1,4 @@
-<div id="history" class="container col-lg-4 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1" >
+<div id="history" class="container col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1" >
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div class="panel-title">
@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div class="panel-body">
-			<div data-ng-if="!!accounts && accounts.length>0">
+			<div data-ng-if="!!accounts">
 				<label>Select account</label>
 				<button type="button" 
 						class="btn btn-default pull-right"
@@ -17,14 +17,14 @@
 					Account <span class="caret"></span>
 				</button>
 			</div>
-			<div data-ng-if="!accounts || accounts.length==0">
+			<div data-ng-if="!accounts">
 				<span class="text-danger">You have no registered accounts</span>
 			</div>
-			<div data-ng-if="!!selectedAccount && (!selectedAccount.history || selectedAccount.history.length==0)">
+			<div data-ng-if="!!selectedAccount && !selectedAccount.history">
 				<span class="text-danger">Account has no transaction history</span>
 			</div>
 		</div>
-		<table class="table" data-ng-if="!!selectedAccount && !!selectedAccount.history && selectedAccount.history.length>0">
+		<table class="table" data-ng-if="!!selectedAccount && !!selectedAccount.history">
 			<thead>
 				<th class="">#</th>
 				<th class="col-md-3">Date</th>

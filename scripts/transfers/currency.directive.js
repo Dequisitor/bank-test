@@ -7,7 +7,7 @@ mainApp.directive("currency", function() {
 		},
 		link: function(scope, element, attr, ngModel) {
 			ngModel.$parsers.unshift(function(value) {
-				value = value.replace(/\s/g, "");
+				value = value.replace(/\D/g, "");
 
 				var result = "";
 				var tmp = value;

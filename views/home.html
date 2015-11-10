@@ -5,10 +5,10 @@
 				Account information
 			</div>
 		</div>
-		<div class="panel-body" data-ng-if="!accounts || accounts.length==0">
+		<div class="panel-body" data-ng-if="!accounts">
 			<span class="text-danger">You have no registered accounts</span>
 		</div>
-		<table class="table" data-ng-if="!!accounts && accounts.length>0">
+		<table class="table" data-ng-if="!!accounts">
 			<tr>
 				<th class="col-md-8">Account #</th>
 				<th class="col-md-2 text-right">Balance</th>

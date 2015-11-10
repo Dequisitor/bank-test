@@ -1,10 +1,8 @@
-mainApp.controller("historyController", function ($scope, $http) {
+mainApp.controller("historyController", function ($scope, $http, dataService) {
 
 	$scope.init = function() {
-		$http.get("/data").then(function(response) {
-			if (!!response.data) {
-				$scope.accounts = response.data.accounts;
-			}
+		dataService.getData(function(data) {
+			$scope.accounts = data.accounts;
 		});
 	}
 	$scope.init();
