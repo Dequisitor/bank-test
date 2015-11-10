@@ -41,12 +41,12 @@ mainApp.run(function ($httpBackend) {
 
 	$httpBackend.whenGET("/data").respond(function(method, url, data, headers, params) {
 		var data = [{
-			id: "0000000-11111111-22222222",
+			id: "00000000-11111111-22222222",
 			balance: 1234,
 			currency: "USD"
 		},
 		{
-			id: "0000000-11111111-22222222",
+			id: "00000000-11111111-33333333",
 			balance: 57689,
 			currency: "HUF"
 		}];

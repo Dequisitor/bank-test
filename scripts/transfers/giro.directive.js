@@ -1,6 +1,9 @@
 mainApp.directive("giro", function() {
 	return {
 		restrict: "A",
+		scope: {
+			giro: "="
+		},
 		require: "ngModel",
 		link: function (scope, element, attr, ngModel) {
 			ngModel.$parsers.push(function(value) {
@@ -49,6 +52,14 @@ mainApp.directive("giro", function() {
 
 				return true;
 			};
+
+			ngModel.$validators.source = function(modelValue, viewValue) {
+				if (!!modelValue && !!viewValue && viewValue.length == 30) {
+					return viewValue.replace(/\s/g,"") != scope.giro.id; 
+				}
+				return true;
+			};
+
 		}
 	}
 });

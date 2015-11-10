@@ -1,5 +1,7 @@
-mainApp.controller("transfersController", function ($scope, $http) {
+mainApp.controller("transfersController", function ($scope, $http, $location) {
 	$scope.transfer = {};
+	$scope.confirm = false;
+	$scope.step = 0;
 	
 	$http.get("/data").then(function(response) {
 		$scope.accounts = response.data;
@@ -10,22 +12,38 @@ mainApp.controller("transfersController", function ($scope, $http) {
 	});
 
 	$scope.reset = function() {
+		$scope.step = 0;
 		$scope.transfer = {};
-		if (transfer) {
-			transfer.$setPrisitine();
-			transfer.$setUntouched();
-		}
+
+		$scope.tForm.$setPristine();
+		$scope.tForm.$setUntouched();
+		angular.element("#transfers .progress-bar").css("width", "0");
 	};
 
-	$scope.adjustProgressbar = function() {
+	$scope.confirmTransfer = function() {
+	};
+
+	$scope.cancelTransfer = function() {
+		$location.path("/home");
+	};
+
+	$scope.resetAmount = function() {
+		$scope.transfer.amount = 0;
+	};
+
+	$scope.adjustProgressbar = function(resetAmount) {
 		var position = 0;
-		if (!!$scope.transfer.selectedAccount && !!$scope.transfer.amount) {
-			position = Math.round($scope.transfer.amount / $scope.transfer.selectedAccount.balance * 100);
-			if (position > 100) {
-				position = 100;
+		if (!!resetAmount) {
+			$scope.transfer.amount = null;
+			angular.element("input.currency").focus();
+		} else {	
+			if (!!$scope.transfer.selectedAccount && !!$scope.transfer.amount) {
+				position = Math.round($scope.transfer.amount / $scope.transfer.selectedAccount.balance * 100);
+				if (position > 100) {
+					position = 100;
+				}
 			}
 		}
-
 		$scope.transfer.percentage = position;
 		angular.element("#transfers .progress-bar").css("width", position+"%");
 	};

@@ -1,24 +1,24 @@
-<div class="container col-md-4 col-md-offset-4" id="transfers">
-<div class="panel panel-info">
-	<div class="panel-heading">
+<div class="container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" id="transfers">
+<div class="panel panel-primary">
+	<div class="panel-heading bg-primary">
 		<div class="panel-title">
 			Domestic transaction
 		</div>
 	</div>
-	<div class="panel-body">
-		<form name="transfer">
+	<form name="tForm">
+		<div class="panel-body" data-ng-if="step == 0">
 			<div class="">
 				<div>
 					<label>Transfer from</label>
 				</div>
 				<button type="button" 
-					class="btn btn-default form-control" 
-					data-html="1" 
-					required=""
-					data-ng-model="transfer.selectedAccount" 
-					data-bs-select="" 
-					data-ng-change="adjustProgressbar()"
-					data-bs-options="account as account.composite for account in accounts">
+						class="btn btn-default form-control" 
+						data-html="1" 
+						required=""
+						data-ng-model="transfer.selectedAccount" 
+						data-bs-select="" 
+						data-ng-change="adjustProgressbar(true)"
+						data-bs-options="account as account.composite for account in accounts">
 					Account <span class="caret"></span>
 				</button>
 			</div>
@@ -26,14 +26,24 @@
 			<div class="block">
 				<div>
 					<label>Amount to transfer</label>
+					<span data-ng-if="tForm.amount.$error.min" class="text-danger pull-right">Must be more than 0 {{ transfer.selectedAccount.currency }}</span>
+					<span data-ng-if="tForm.amount.$error.max" class="text-danger pull-right">Must be less than {{ transfer.selectedAccount.balance }} {{ transfer.selectedAccount.currency }}</span>
 				</div>
 				<div class="progress">
-					<div class="progress-bar"> 
+					<div class="progress-bar progress-bar-info"> 
 						{{ transfer.percentage }}%
 					</div>
 				</div>
 				<div class="input-group">
-					<input type="text" class="form-control" data-ng-model="transfer.amount" required="" data-ng-change="adjustProgressbar()" data-currency=""/>
+					<input 
+						type="text" 
+						name="amount"
+						class="form-control currency" 
+						data-ng-model="transfer.amount"	
+						required="" 
+						data-ng-disabled="!transfer.selectedAccount"
+						data-ng-change="adjustProgressbar()" 
+						data-currency="transfer.selectedAccount.balance"/>
 					<span class="input-group-addon">{{transfer.selectedAccount.currency}}</span>
 				</div>
 			</div>
@@ -41,27 +51,44 @@
 			<div class="block">
 				<div>
 					<label>Destination account</label>
-					<span data-ng-if="transfer.dest.$error.length" class="text-danger pull-right">Length must be 16 or 24 numbers</span>
-					<span data-ng-if="transfer.dest.$error.giro" class="text-danger pull-right">Not a valid GIRO account number</span>
+					<span data-ng-if="tForm.destination.$error.length" class="text-danger pull-right">Length must be 16 or 24 numbers</span>
+					<span data-ng-if="tForm.destination.$error.giro" class="text-danger pull-right">Not a valid GIRO account number</span>
+					<span data-ng-if="tForm.destination.$error.source" class="text-danger pull-right">Destination account matches source account</span>
 				</div>
 				<input 
-					name="dest" 
-					type="text" 
-					class="form-control" 
-					data-ng-model="transfer.destination" 
-					required="" 
-					data-giro="" 
-					/>
+					name="destination"
+					type="text"
+					class="form-control giro"
+					data-ng-model="transfer.destination"
+					required=""
+					data-ng-disabled="!transfer.amount"
+					data-giro="transfer.selectedAccount"
+				 />
 			</div>
+		</div>
+		<div class="panel-footer" data-ng-if="step == 0">
+			<button class="btn btn-success pull-right" type="submit" data-ng-disabled="!tForm.$valid" data-ng-click="$parent.step = 1"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
+			<button class="btn btn-warning" type="button" data-ng-click="reset()"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+		</div>
+	</form>
 
-			<div class="block">
-				<div>
-					<button class="btn btn-success pull-right" type="submit" data-ng-disabled="!transfer.$valid" data-ng-click="confirmTransfer()"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
-					<button class="btn btn-warning pull-right" type="button" data-ng-click="reset()"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
-				</div>
-			</div>
-		</form>
-
+	<div class="panel-body" data-ng-if="step == 1">
+		<label class="fixwidth-200">Source account:</label>{{ transfer.selectedAccount.id }}<br/>
+		<label class="fixwidth-200">Amount to transfer:</label>{{ transfer.amount }} {{ transfer.selectedAccount.currency }}<br/>
+		<label class="fixwidth-200">Destination account:</label>{{ transfer.destination }}<br/>
 	</div>
+	<div class="panel-footer" data-ng-if="step == 1">
+		<button type="button" class="btn btn-danger" data-ng-click="cancelTransfer()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+		<button type="button" class="btn btn-success pull-right fixmarginleft-10" data-ng-click="$parent.step = 2"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
+		<button type="button" class="btn btn-primary pull-right" data-ng-click="$parent.step = 0"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+	</div>
+
+	<div class="panel-body" data-ng-show="step == 2">
+		<h3>Your transaction completed successfully.</h3>
+	</div>
+	<div class="panel-footer" data-ng-show="step == 2">
+		<button type="button" class="btn btn-primary" data-ng-click="reset()"><span class="glyphicon glyphicon-refresh"><span> New transaction</button>
+	</div>
+
 </div>
 </div>

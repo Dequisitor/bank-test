@@ -5,12 +5,6 @@ form.login {
   width: 320px;
   padding: 10px;
 }
-form.login input {
-  height: auto;
-}
-form.login button {
-  margin-top: 20px;
-}
 #logoutModal .modal-dialog {
   width: 300px;
 }
@@ -23,9 +17,21 @@ form.login button {
 #transfers .ng-invalid.ng-dirty {
   border-color: red;
 }
+#transfers input.currency {
+  text-align: right;
+}
+#transfers input.giro {
+  text-align: center;
+}
 #transfers .block {
   margin-top: 10px;
   padding-top: 10px;
   margin-bottom: 0px;
   padding-bottom: 0px;
+}
+.fixmarginleft-10 {
+  margin-left: 10px;
+}
+.fixwidth-200 {
+  width: 200px;
 }
