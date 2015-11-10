@@ -7,66 +7,72 @@
 	</div>
 	<form name="tForm">
 		<div class="panel-body" data-ng-if="step == 0">
-			<div class="">
-				<div>
-					<label>Transfer from</label>
-				</div>
-				<button type="button" 
-						class="btn btn-default form-control" 
-						data-html="1" 
-						required=""
-						data-ng-model="transfer.selectedAccount" 
-						data-bs-select="" 
-						data-ng-change="adjustProgressbar(true)"
-						data-bs-options="account as account.composite for account in accounts">
-					Account <span class="caret"></span>
-				</button>
+			<div data-ng-if="!accounts || accounts.length==0">
+				<span class="text-danger">You have no registered accounts</span>
 			</div>
 
-			<div class="block">
+			<div data-ng-if="!!accounts && accounts.length>0">
 				<div>
-					<label>Amount to transfer</label>
-					<span data-ng-if="tForm.amount.$error.min" class="text-danger pull-right">Must be more than 0 {{ transfer.selectedAccount.currency }}</span>
-					<span data-ng-if="tForm.amount.$error.max" class="text-danger pull-right">Must be less than {{ transfer.selectedAccount.balance }} {{ transfer.selectedAccount.currency }}</span>
+					<div>
+						<label>Transfer from</label>
+					</div>
+					<button type="button" 
+							class="btn btn-default form-control" 
+							data-html="1" 
+							required=""
+							data-ng-model="transfer.selectedAccount" 
+							data-bs-select="" 
+							data-ng-change="adjustProgressbar(true)"
+							data-bs-options="account as account.composite for account in accounts">
+						Account <span class="caret"></span>
+					</button>
 				</div>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info"> 
-						{{ transfer.percentage }}%
+
+				<div class="block">
+					<div>
+						<label>Amount to transfer</label>
+						<span data-ng-if="tForm.amount.$error.min" class="text-danger pull-right">Must be more than 0 {{ transfer.selectedAccount.currency }}</span>
+						<span data-ng-if="tForm.amount.$error.max" class="text-danger pull-right">Must be less than {{ transfer.selectedAccount.balance }} {{ transfer.selectedAccount.currency }}</span>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info"> 
+							{{ transfer.percentage }}%
+						</div>
+					</div>
+					<div class="input-group">
+						<input 
+							type="text" 
+							name="amount"
+							class="form-control currency" 
+							data-ng-model="transfer.amount"	
+							required="" 
+							data-ng-disabled="!transfer.selectedAccount"
+							data-ng-change="adjustProgressbar()" 
+							data-currency="transfer.selectedAccount.balance"/>
+						<span class="input-group-addon">{{transfer.selectedAccount.currency}}</span>
 					</div>
 				</div>
-				<div class="input-group">
-					<input 
-						type="text" 
-						name="amount"
-						class="form-control currency" 
-						data-ng-model="transfer.amount"	
-						required="" 
-						data-ng-disabled="!transfer.selectedAccount"
-						data-ng-change="adjustProgressbar()" 
-						data-currency="transfer.selectedAccount.balance"/>
-					<span class="input-group-addon">{{transfer.selectedAccount.currency}}</span>
-				</div>
-			</div>
 
-			<div class="block">
-				<div>
-					<label>Destination account</label>
-					<span data-ng-if="tForm.destination.$error.length" class="text-danger pull-right">Length must be 16 or 24 numbers</span>
-					<span data-ng-if="tForm.destination.$error.giro" class="text-danger pull-right">Not a valid GIRO account number</span>
-					<span data-ng-if="tForm.destination.$error.source" class="text-danger pull-right">Destination account matches source account</span>
+				<div class="block">
+					<div>
+						<label>Destination account</label>
+						<span data-ng-if="tForm.destination.$error.length" class="text-danger pull-right">Length must be 16 or 24 numbers</span>
+						<span data-ng-if="tForm.destination.$error.giro" class="text-danger pull-right">Not a valid GIRO account number</span>
+						<span data-ng-if="tForm.destination.$error.source" class="text-danger pull-right">Destination account matches source account</span>
+					</div>
+					<input 
+						name="destination"
+						type="text"
+						class="form-control giro"
+						data-ng-model="transfer.destination"
+						required=""
+						data-ng-disabled="!transfer.amount"
+						data-giro="transfer.selectedAccount"
+					 />
 				</div>
-				<input 
-					name="destination"
-					type="text"
-					class="form-control giro"
-					data-ng-model="transfer.destination"
-					required=""
-					data-ng-disabled="!transfer.amount"
-					data-giro="transfer.selectedAccount"
-				 />
 			</div>
 		</div>
-		<div class="panel-footer" data-ng-if="step == 0">
+		<div class="panel-footer" data-ng-if="step == 0 && !!accounts && accounts.length>0">
 			<button class="btn btn-success pull-right" type="submit" data-ng-disabled="!tForm.$valid" data-ng-click="$parent.step = 1"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
 			<button class="btn btn-warning" type="button" data-ng-click="reset()"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
 		</div>

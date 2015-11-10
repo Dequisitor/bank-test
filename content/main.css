@@ -29,6 +29,12 @@ form.login {
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
+#history tbody tr:nth-child(even) {
+  background-color: #eee;
+}
+#history tbody tr:nth-child(odd) {
+  background-color: #ddd;
+}
 .fixmarginleft-10 {
   margin-left: 10px;
 }

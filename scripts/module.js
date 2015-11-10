@@ -10,7 +10,6 @@ mainApp.run(function($rootScope, $location, $window, AuthService) {
 			$rootScope.$evalAsync(function() {
 				$location.path("/login");
 			});
-			console.log("nein");
 		}
 	});
 

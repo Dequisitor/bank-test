@@ -2,14 +2,18 @@ mainApp.controller("transfersController", function ($scope, $http, $location) {
 	$scope.transfer = {};
 	$scope.confirm = false;
 	$scope.step = 0;
-	
-	$http.get("/data").then(function(response) {
-		$scope.accounts = response.data;
 
-		for (var i=0; i<$scope.accounts.length; i++) {
-			$scope.accounts[i].composite = $scope.accounts[i].id + "<strong class='text-right balance'>" + $scope.accounts[i].balance + " " + $scope.accounts[i].currency + "</strong>";
-		}
-	});
+	$scope.init = function() {
+		$http.get("/data").then(function(response) {
+			if (!!response.data && !!response.data.accounts) {
+				$scope.accounts = response.data.accounts;
+				for (var i=0; i<$scope.accounts.length; i++) {
+					$scope.accounts[i].composite = $scope.accounts[i].id + "<strong class='text-right balance'>" + $scope.accounts[i].balance + " " + $scope.accounts[i].currency + "</strong>";
+				}
+			}
+		});
+	}
+	$scope.init();
 
 	$scope.reset = function() {
 		$scope.step = 0;
