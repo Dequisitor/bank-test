@@ -55,49 +55,49 @@ mainApp.run(function ($httpBackend) {
 					{
 						date: "1288322633006",
 						other: "12345678-12345678-12345678",
-						amount: "2000",
+						amount: 2000,
 						type: "income"
 					},
 					{
 						date: "1288833623836",
 						other: "12345678-00000000-12345678",
-						amount: "1234",
+						amount: 1234,
 						type: "expense"
 					},
 					{
 						date: "1298322625006",
 						other: "12345678-00000000-12345678",
-						amount: "52",
+						amount: 52,
 						type: "expense"
 					},
 					{
 						date: "1288323624006",
 						other: "12345678-33333333-12345678",
-						amount: "39",
+						amount: 39,
 						type: "expense"
 					},
 					{
 						date: "1288343621006",
 						other: "12345678-55555555-12345678",
-						amount: "210",
+						amount: 210,
 						type: "expense"
 					},
 					{
 						date: "1288323623406",
 						other: "12345678-12345678-12345678",
-						amount: "2000",
+						amount: 2000,
 						type: "income"
 					},
 					{
 						date: "1288423623206",
 						other: "12345678-33333333-12345678",
-						amount: "899",
+						amount: 899,
 						type: "expense"
 					},
 					{
 						date: "1288523623106",
 						other: "12345678-55555555-12345678",
-						amount: "599",
+						amount: 599,
 						type: "expense"
 					},
 				]

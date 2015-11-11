@@ -26,16 +26,33 @@
 		</div>
 		<table class="table" data-ng-if="!!selectedAccount && !!selectedAccount.history">
 			<thead>
-				<th class="">#</th>
-				<th class="col-md-3">Date</th>
-				<th class="col-md-1">Type</th>
-				<th class="col-md-6">Source/Destination account</th>
-				<th class="col-md-2">Amount</th>
+				<th class="col-md-3">
+					<a href="" data-ng-click="orderBy('date')">Date</a>
+					<span class="glyphicon glyphicon-arrow-down text-success" data-ng-if="sortPredicate == 'date' && !reverse"></span>
+					<span class="glyphicon glyphicon-arrow-up text-danger" data-ng-if="sortPredicate == 'date' && reverse"></span>
+				</th>
+				<th class="col-md-1">
+					<a href="" data-ng-click="orderBy('type')">Type</a>
+					<span class="glyphicon glyphicon-arrow-down text-success" data-ng-if="sortPredicate == 'type' && !reverse"></span>
+					<span class="glyphicon glyphicon-arrow-up text-danger" data-ng-if="sortPredicate == 'type' && reverse"></span>
+				</th>
+				<th class="col-md-6">
+					<a href="" data-ng-click="orderBy('other')">Source/Destination account</a>
+					<span class="glyphicon glyphicon-arrow-down text-success" data-ng-if="sortPredicate == 'other' && !reverse"></span>
+					<span class="glyphicon glyphicon-arrow-up text-danger" data-ng-if="sortPredicate == 'other' && reverse"></span>
+				</th>
+				<th class="col-md-2">
+					<a href="" data-ng-click="orderBy('amount')">Amount</a>
+					<span class="glyphicon glyphicon-arrow-down text-success" data-ng-if="sortPredicate == 'amount' && !reverse"></span>
+					<span class="glyphicon glyphicon-arrow-up text-danger" data-ng-if="sortPredicate == 'amount' && reverse"></span>
+				</th>
 			</thead>
-			<tr data-ng-repeat="entry in selectedAccount.history">
-				<td class="">{{ $index+1 }}</td>
+			<tr data-ng-repeat="entry in selectedAccount.history | orderBy: sortPredicate: reverse">
 				<td class="col-md-3">{{ entry.date | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-				<td class="col-md-1">{{ entry.type }}</td>
+				<td class="col-md-1" 
+					data-ng-class="[{ 'text-success': entry.type=='income' }, { 'text-danger': entry.type=='expense' }]">
+					{{ entry.type }}
+				</td>
 				<td class="col-md-6">{{ entry.other }}</td>
 				<td class="col-md-2 text-right">{{ entry.amount }} {{ selectedAccount.currency }}</td>
 			</tr>
