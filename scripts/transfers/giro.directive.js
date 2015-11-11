@@ -54,7 +54,7 @@ mainApp.directive("giro", function() {
 			};
 
 			ngModel.$validators.source = function(modelValue, viewValue) {
-				if (!!modelValue && !!viewValue && viewValue.length == 30) {
+				if (!!modelValue && !!viewValue && (viewValue.length == 30 || viewValue.length == 19)) {
 					return viewValue.replace(/\s/g,"") != scope.giro.id; 
 				}
 				return true;

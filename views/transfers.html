@@ -34,6 +34,11 @@
 						<span data-ng-if="tForm.amount.$error.min" class="text-danger pull-right">Must be more than 0 {{ transfer.selectedAccount.currency }}</span>
 						<span data-ng-if="tForm.amount.$error.max" class="text-danger pull-right">Must be less than {{ transfer.selectedAccount.balance }} {{ transfer.selectedAccount.currency }}</span>
 					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info"> 
+							{{ transfer.percentage }}%
+						</div>
+					</div>
 					<div class="input-group">
 						<input 
 							type="text" 
@@ -45,11 +50,6 @@
 							data-ng-change="adjustProgressbar()" 
 							data-currency="transfer.selectedAccount.balance"/>
 						<span class="input-group-addon">{{transfer.selectedAccount.currency}}</span>
-					</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-info"> 
-							{{ transfer.percentage }}%
-						</div>
 					</div>
 				</div>
 

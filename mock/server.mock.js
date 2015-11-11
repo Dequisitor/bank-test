@@ -48,7 +48,7 @@ mainApp.run(function ($httpBackend) {
 		var data = [];
 		data.push({
 				accounts: [{
-				id: "00000000-11111111-22222222",
+				id: "10000001-00000000-00000017",
 				balance: 1234,
 				currency: "USD",
 				history: [
@@ -103,7 +103,7 @@ mainApp.run(function ($httpBackend) {
 				]
 			},
 			{
-				id: "00000000-11111111-33333333",
+				id: "10000001-00000024",
 				balance: 57689,
 				currency: "HUF"
 			}]
