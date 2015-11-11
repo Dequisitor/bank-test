@@ -6,8 +6,10 @@ mainApp.controller("transfersController", function ($scope, $http, $location, da
 	$scope.init = function() {
 		dataService.getData(function(data) {
 			$scope.accounts = data.accounts;
-			for (var i=0; i<$scope.accounts.length; i++) {
-				$scope.accounts[i].composite = $scope.accounts[i].id + "<strong class='text-right balance'>" + $scope.accounts[i].balance + " " + $scope.accounts[i].currency + "</strong>";
+			if (!!$scope.accounts) {
+				for (var i=0; i<$scope.accounts.length; i++) {
+					$scope.accounts[i].composite = $scope.accounts[i].id + "<strong class='text-right balance'>" + $scope.accounts[i].balance + " " + $scope.accounts[i].currency + "</strong>";
+				}
 			}
 		});
 	}

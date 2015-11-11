@@ -6,7 +6,7 @@
 		</div>
 	</div>
 	<form name="tForm">
-		<div class="panel-body" data-ng-if="step == 0">
+		<div class="panel-body" data-ng-show="step == 0">
 			<div data-ng-if="!accounts">
 				<span class="text-danger">You have no registered accounts</span>
 			</div>
@@ -34,11 +34,6 @@
 						<span data-ng-if="tForm.amount.$error.min" class="text-danger pull-right">Must be more than 0 {{ transfer.selectedAccount.currency }}</span>
 						<span data-ng-if="tForm.amount.$error.max" class="text-danger pull-right">Must be less than {{ transfer.selectedAccount.balance }} {{ transfer.selectedAccount.currency }}</span>
 					</div>
-					<div class="progress">
-						<div class="progress-bar progress-bar-info"> 
-							{{ transfer.percentage }}%
-						</div>
-					</div>
 					<div class="input-group">
 						<input 
 							type="text" 
@@ -50,6 +45,11 @@
 							data-ng-change="adjustProgressbar()" 
 							data-currency="transfer.selectedAccount.balance"/>
 						<span class="input-group-addon">{{transfer.selectedAccount.currency}}</span>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info"> 
+							{{ transfer.percentage }}%
+						</div>
 					</div>
 				</div>
 
@@ -78,15 +78,15 @@
 		</div>
 	</form>
 
-	<div class="panel-body" data-ng-if="step == 1">
+	<div class="panel-body" data-ng-show="step == 1">
 		<label class="fixwidth-200">Source account:</label>{{ transfer.selectedAccount.id }}<br/>
 		<label class="fixwidth-200">Amount to transfer:</label>{{ transfer.amount }} {{ transfer.selectedAccount.currency }}<br/>
 		<label class="fixwidth-200">Destination account:</label>{{ transfer.destination }}<br/>
 	</div>
-	<div class="panel-footer" data-ng-if="step == 1">
+	<div class="panel-footer" data-ng-show="step == 1">
 		<button type="button" class="btn btn-danger" data-ng-click="cancelTransfer()"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-		<button type="button" class="btn btn-success pull-right fixmarginleft-10" data-ng-click="$parent.step = 2"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
-		<button type="button" class="btn btn-primary pull-right" data-ng-click="$parent.step = 0"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+		<button type="button" class="btn btn-success pull-right fixmarginleft-10" data-ng-click="step = 2"><span class="glyphicon glyphicon-ok"></span> Confirm</button>
+		<button type="button" class="btn btn-primary pull-right" data-ng-click="step = 0"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
 	</div>
 
 	<div class="panel-body" data-ng-show="step == 2">

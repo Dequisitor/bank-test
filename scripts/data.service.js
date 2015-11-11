@@ -1,11 +1,12 @@
 mainApp.service("dataService", function($http, $rootScope) {
-	var data = null; //check for different users
+	var data = null;
+	//this.data = null; //check for different users
 
 	this.getData = function(callback) {
 		if (!data) {
 			$http.get("/data").then(function(response) {
 				data = {};
-				if (!response.data || response.data.accounts.length == 0) {
+				if (!response.data || !response.data.accounts || response.data.accounts.length == 0) {
 					data.accounts = null;
 				} else {
 					data.accounts = response.data.accounts;
@@ -21,4 +22,8 @@ mainApp.service("dataService", function($http, $rootScope) {
 			callback(data);
 		}
 	};
+
+	$rootScope.$on("logout", function() {
+		data = null;
+	});
 });

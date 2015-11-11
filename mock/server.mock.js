@@ -1,12 +1,10 @@
-var token = ["BTuser1", "BTuser2", "BTuser3"];
+var token = ["BTuser1", "BTuser2", "BTuser3", "BTuser4"];
 
 mainApp.config(function ($provide) {
 	$provide.decorator("$httpBackend", function($delegate) {
 		var proxy = function (method, url, data, callback, headers) {
 			var interceptor = function () {
 				if ((url !== "login.html" && url !== "/auth") && (!headers.auth || token.indexOf(headers.auth) == -1)) {
-					//console.log("requested url=" +url);
-					//console.log("headers.auth=" + headers.auth + " token=" + token.indexOf(headers.auth));
 					arguments = [401, {}, {}];
 				}
 
@@ -37,6 +35,10 @@ mainApp.run(function ($httpBackend) {
 		if (user.login == "test03" && user.passwd == "pass3") {
 			user = user.login;
 			return [200, {token: token[2]}, {}];
+		}
+		if (user.login == "test04" && user.passwd == "pass4") {
+			user = user.login;
+			return [200, {token: token[3]}, {}];
 		}
 
 		return [401, {}, {}];
@@ -109,7 +111,15 @@ mainApp.run(function ($httpBackend) {
 
 		data.push({});
 		data.push({
-			accounts: {}
+			accounts: []
+		});
+		data.push({
+			accounts: [{
+				id: "11111111-99999999-44444444",
+				balance: 3500,
+				currency: "SEK",
+				history: []
+			}]
 		});
 		var index = token.indexOf(headers.auth);
 		
