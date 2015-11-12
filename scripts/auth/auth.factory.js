@@ -1,3 +1,7 @@
+/*
+ * factory for handling login and logout functions
+ * emits states on routeScope
+ */
 mainApp.factory("AuthService", ["$rootScope", "$window", "$http", function($rootScope, $window, $http) {
 	var authService = {};
 

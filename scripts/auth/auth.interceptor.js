@@ -1,3 +1,7 @@
+/*
+ * request interceptor
+ * catches all requests and applies the current bearer token to the request headers
+ */
 mainApp.factory("authInterceptor", function($rootScope, $q, $window) {
 	return {
 		request: function (config) {

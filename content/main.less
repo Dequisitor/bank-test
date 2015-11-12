@@ -65,7 +65,7 @@ form.login {
 	width: 200px;
 }
 
-.main-view {
+#main-view {
 	position: relative;
 
 	> div {
@@ -78,7 +78,7 @@ form.login {
 	}
 }
 
-.main-view.slide {
+#main-view.slide-left {
 	> div.ng-enter, > div.ng-leave {
 		transition: all ease 1s;
 	}
@@ -95,37 +95,20 @@ form.login {
 		left: -100%;
 	}
 }
-.main-view.slide-up {
+#main-view.slide-right {
 	> div.ng-enter, > div.ng-leave {
 		transition: all ease 1s;
 	}
 	> div.ng-enter {
-		top: -100%;
+		left: -100%;
 	}
 	> div.ng-enter-active {
-		top: 0;
+		left: 0;
 	}
 	> div.ng-leave {
-		top: 0;
+		left: 0;
 	}
 	> div.ng-leave-active {
-		top: 100%;
-	}
-}
-.main-view.fader {
-	> div.ng-enter, > div.ng-leave {
-		transition: all ease 1s;
-	}
-	> div.ng-enter {
-		opacity: 0;
-	}
-	> div.ng-enter-active {
-		opacity: 1;
-	}
-	> div.ng-leave {
-		opacity: 1;
-	}
-	> div.ng-leave-active {
-		opacity: 0;
+		left: 100%;
 	}
 }

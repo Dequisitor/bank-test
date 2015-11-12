@@ -41,10 +41,10 @@ form.login {
 .fixwidth-200 {
   width: 200px;
 }
-.main-view {
+#main-view {
   position: relative;
 }
-.main-view > div {
+#main-view > div {
   position: absolute;
   left: 0;
   top: 0;
@@ -52,51 +52,35 @@ form.login {
   height: 100%;
   opacity: 1;
 }
-.main-view.slide > div.ng-enter,
-.main-view.slide > div.ng-leave {
+#main-view.slide-left > div.ng-enter,
+#main-view.slide-left > div.ng-leave {
   transition: all ease 1s;
 }
-.main-view.slide > div.ng-enter {
+#main-view.slide-left > div.ng-enter {
   left: 100%;
 }
-.main-view.slide > div.ng-enter-active {
+#main-view.slide-left > div.ng-enter-active {
   left: 0;
 }
-.main-view.slide > div.ng-leave {
+#main-view.slide-left > div.ng-leave {
   left: 0;
 }
-.main-view.slide > div.ng-leave-active {
+#main-view.slide-left > div.ng-leave-active {
   left: -100%;
 }
-.main-view.slide-up > div.ng-enter,
-.main-view.slide-up > div.ng-leave {
+#main-view.slide-right > div.ng-enter,
+#main-view.slide-right > div.ng-leave {
   transition: all ease 1s;
 }
-.main-view.slide-up > div.ng-enter {
-  top: -100%;
+#main-view.slide-right > div.ng-enter {
+  left: -100%;
 }
-.main-view.slide-up > div.ng-enter-active {
-  top: 0;
+#main-view.slide-right > div.ng-enter-active {
+  left: 0;
 }
-.main-view.slide-up > div.ng-leave {
-  top: 0;
+#main-view.slide-right > div.ng-leave {
+  left: 0;
 }
-.main-view.slide-up > div.ng-leave-active {
-  top: 100%;
-}
-.main-view.fader > div.ng-enter,
-.main-view.fader > div.ng-leave {
-  transition: all ease 1s;
-}
-.main-view.fader > div.ng-enter {
-  opacity: 0;
-}
-.main-view.fader > div.ng-enter-active {
-  opacity: 1;
-}
-.main-view.fader > div.ng-leave {
-  opacity: 1;
-}
-.main-view.fader > div.ng-leave-active {
-  opacity: 0;
+#main-view.slide-right > div.ng-leave-active {
+  left: 100%;
 }
