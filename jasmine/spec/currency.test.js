@@ -16,13 +16,28 @@ describe("currency directive", function() {
 		testForm = $scope.testForm;
 	}));
 
-	describe("currency", function() {
+	describe("invalid values", function() {
 		it("should not allow negative numbers", function() {
 			testForm.currency.$setViewValue("-100");
 			$scope.$digest();
 			expect($scope.amount).toEqual("100");
 			expect(testForm.currency.$valid).toBe(true);
 		});
+		it("should not allow non-digits", function() {
+			testForm.currency.$setViewValue("asdasd");
+			$scope.$digest();
+			expect(testForm.currency.$valid).toBe(false);
+			testForm.currency.$setViewValue("asd00asd23asd");
+			$scope.$digest();
+			expect($scope.amount).toEqual("23");
+			testForm.currency.$setViewValue("30.1241");
+			$scope.$digest();
+			expect($scope.amount).toEqual("301241");
+			expect(testForm.currency.$error.max).toBe(true);
+		});
+
+	});
+	describe("min/max values", function() {
 		it("should not allow 0", function() {
 			testForm.currency.$setViewValue("0");
 			$scope.$digest();
@@ -39,18 +54,8 @@ describe("currency directive", function() {
 			expect($scope.amount).toEqual("2001");
 			expect(testForm.currency.$valid).toBe(false);
 		});
-		it("should not allow non-digits", function() {
-			testForm.currency.$setViewValue("asdasd");
-			$scope.$digest();
-			expect(testForm.currency.$valid).toBe(false);
-			testForm.currency.$setViewValue("asd00asd23asd");
-			$scope.$digest();
-			expect($scope.amount).toEqual("23");
-			testForm.currency.$setViewValue("30.1241");
-			$scope.$digest();
-			expect($scope.amount).toEqual("301241");
-			expect(testForm.currency.$error.max).toBe(true);
-		});
+	});
+	describe("separation", function() {
 		it("should separate thousands", function() {
 			testForm.currency.$setViewValue("100");
 			$scope.$digest();
@@ -68,6 +73,5 @@ describe("currency directive", function() {
 			$scope.$digest();
 			expect(testForm.currency.$viewValue).toBe("1 141 000 000 213");
 		});
-
 	});
 });
