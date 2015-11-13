@@ -31,7 +31,7 @@ mainApp
 		AuthService.login(
 			$scope.user,
 			function() {
-				$location.path("/index");
+				$location.path("/home");
 			},
 			function() {
 				$scope.user.passwd = "";
