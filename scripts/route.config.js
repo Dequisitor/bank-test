@@ -1,3 +1,4 @@
+///angular route configuration for ng-view
 mainApp
 .config(["$routeProvider", "$locationProvider",
 	function ($routeProvider, $locationProvider) {

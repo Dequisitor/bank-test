@@ -1,5 +1,6 @@
 mainApp.controller("historyController", function ($scope, $http, dataService) {
 
+	//get data from service, set defaults
 	$scope.init = function() {
 		$scope.sortPredicate = "date";
 		$scope.reverse = false;
@@ -10,6 +11,7 @@ mainApp.controller("historyController", function ($scope, $http, dataService) {
 	}
 	$scope.init();
 
+	//handle orderby requests
 	$scope.orderBy = function(predicate) {
 		$scope.reverse = ($scope.sortPredicate == predicate) ? !$scope.reverse : false;
 		$scope.sortPredicate = predicate;

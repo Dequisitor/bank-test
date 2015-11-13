@@ -6,6 +6,8 @@ mainApp.directive("giro", function() {
 		},
 		require: "ngModel",
 		link: function (scope, element, attr, ngModel) {
+			///parse input data
+			///disregards everything that is not a number (decimal points too)
 			ngModel.$parsers.push(function(value) {
 				var effectiveValue = value.replace(/\D/g, "");
 
@@ -21,6 +23,7 @@ mainApp.directive("giro", function() {
 				return effectiveValue;
 			});
 
+			//giro crc check
 			var checkCRC = function(value) {
 				var checks = [9, 7, 3, 1], crc = 0;
 				for (var i=0; i<value.length-1; i++) {
@@ -30,6 +33,7 @@ mainApp.directive("giro", function() {
 				return (10 - (crc%10)) == value[value.length-1];
 			};
 
+			//giro validator
 			ngModel.$validators.giro = function(modelValue, viewValue) {
 				if (!!modelValue && !!viewValue) {
 					var effectiveValue = viewValue.replace(/\D/g, "");
@@ -42,6 +46,7 @@ mainApp.directive("giro", function() {
 				return true;
 			};
 
+			//length validator (16 or 24)
 			ngModel.$validators.length = function(modelValue, viewValue) {
 				if (!!modelValue && !!viewValue) {
 					var effectiveValue = viewValue.replace(/\D/g, "");
@@ -53,6 +58,7 @@ mainApp.directive("giro", function() {
 				return true;
 			};
 
+			//source must be different from destination
 			ngModel.$validators.source = function(modelValue, viewValue) {
 				if (!!modelValue && !!viewValue && (viewValue.length == 30 || viewValue.length == 19)) {
 					return viewValue.replace(/\s/g,"") != scope.giro.id; 

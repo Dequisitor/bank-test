@@ -6,6 +6,9 @@ mainApp.directive("currency", function() {
 			currency: "="
 		},
 		link: function(scope, element, attr, ngModel) {
+			///parser function won`t allow non-digits
+			///therefor you can`t enter decimals or characters either
+			///separates thousands with a space
 			ngModel.$parsers.unshift(function(value) {
 				value = parseInt(value.replace(/\D/g, "")).toString();
 
@@ -32,6 +35,7 @@ mainApp.directive("currency", function() {
 				return value;
 			});
 
+			//no 0 allowed
 			ngModel.$validators.min = function(modelValue, viewValue) {
 				if (!!modelValue) {
 					return modelValue > 0;
@@ -40,6 +44,7 @@ mainApp.directive("currency", function() {
 				return true;
 			};
 
+			//you can only send as much as you have on your account
 			ngModel.$validators.max = function(modelValue, viewValue) {
 				if (!!modelValue) {
 					return modelValue <= scope.currency;

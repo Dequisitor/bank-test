@@ -3,6 +3,7 @@ mainApp.controller("transfersController", function ($scope, $http, $location, da
 	$scope.confirm = false;
 	$scope.step = 0;
 
+	///get user accounts from service
 	$scope.init = function() {
 		dataService.getData(function(data) {
 			$scope.accounts = data.accounts;
@@ -15,6 +16,7 @@ mainApp.controller("transfersController", function ($scope, $http, $location, da
 	}
 	$scope.init();
 
+	//reset form
 	$scope.reset = function() {
 		$scope.step = 0;
 		$scope.transfer = {};
@@ -24,17 +26,17 @@ mainApp.controller("transfersController", function ($scope, $http, $location, da
 		angular.element("#transfers .progress-bar").css("width", "0");
 	};
 
-	$scope.confirmTransfer = function() {
-	};
-
+	//cancel, send back to home page
 	$scope.cancelTransfer = function() {
 		$location.path("/home");
 	};
 
+	//new account is selected, reset amount
 	$scope.resetAmount = function() {
 		$scope.transfer.amount = 0;
 	};
 
+	//change progressbar
 	$scope.adjustProgressbar = function(resetAmount) {
 		var position = 0;
 		if (!!resetAmount) {

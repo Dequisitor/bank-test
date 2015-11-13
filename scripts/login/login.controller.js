@@ -20,6 +20,7 @@ mainApp
 	};
 	$scope.checkLoggedIn();
 
+	///login with the help of AuthService (added rememberMe functionality)
 	$scope.authenticate = function () {
 		if ($scope.rememberMe) {
 			$window.sessionStorage.rememberUser = $scope.user.login;
